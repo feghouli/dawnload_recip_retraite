@@ -183,18 +183,38 @@
       }
 
       const d = data.data;
+      // ✅ تنسيق تاريخ الميلاد (dd-mm-yyyy)
+let birthFormatted = "";
+if (d.birth) {
+  const [year, month, day] = d.birth.split("-");
+  birthFormatted = `${day}-${month}-${year}`;
+}
+
+// ✅ تنسيق تاريخ ووقت التسجيل (dd-mm-yyyy hh:mm:ss)
+let dateFormatted = "";
+if (d.date) {
+  const dateObj = new Date(d.date);
+  const day = String(dateObj.getDate()).padStart(2, '0');
+  const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+  const year = dateObj.getFullYear();
+  const hours = String(dateObj.getHours()).padStart(2, '0');
+  const minutes = String(dateObj.getMinutes()).padStart(2, '0');
+  const seconds = String(dateObj.getSeconds()).padStart(2, '0');
+  dateFormatted = `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
+}
+
      Swal.fire({
   title: "✅ التسجيل موجود",
   html: `
     <div style="text-align:right;font-family:'Cairo',sans-serif;direction:rtl;">
       <p><b>اللقب والإسم:</b> ${d.name}</p>
-      <p><b>تاريخ الميلاد:</b> ${d.birth}</p>
+      <p><b>تاريخ الميلاد:</b> ${birthFormatted}</p>
       <p><b>الصفة:</b> ${d.status}</p>
       <p><b>الدائرة:</b> ${d.daira}</p>
       <p><b>البلدية:</b> ${d.commune}</p>
       <p><b>الرحلة:</b> ${d.trip}</p>
       <p><b>رقم الهاتف:</b> ${d.phone}</p>
-      <p><b>تاريخ التسجيل:</b> ${d.date}</p>
+      <p><b>تاريخ التسجيل:</b> ${dateFormatted}</p>
       <br>
       <div style="text-align:center;">
         <a href="${data.fileUrl}" target="_blank" style="
@@ -243,6 +263,7 @@
   </script>
 </body>
 </html>
+
 
 
 
