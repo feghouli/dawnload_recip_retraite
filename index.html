@@ -183,40 +183,41 @@
       }
 
       const d = data.data;
-      Swal.fire({
-        title: "✅ التسجيل موجود",
-        html: `
-          <div style="text-align:right;font-family:'Cairo',sans-serif;direction:rtl;">
-            <p><b>اللقب والإسم:</b> ${d.name}</p>
-            <p><b>الصفة:</b> ${d.status}</p>
-            <p><b>الدائرة:</b> ${d.daira}</p>
-            <p><b>البلدية:</b> ${d.commune}</p>
-            <p><b>الرحلة:</b> ${d.trip}</p>
-            <p><b>رقم الهاتف:</b> ${d.phone}</p>
-            <p><b>تاريخ التسجيل:</b> ${d.date}</p>
-            <br>
-            <div style="text-align:center;">
-              <a href="${data.fileUrl}" target="_blank" style="
-                display:inline-block;
-                background:#ef4444;
-                color:white;
-                text-decoration:none;
-                padding:12px 26px;
-                border-radius:10px;
-                font-weight:700;
-                font-size:17px;
-                transition:0.3s;
-                font-family:'Cairo',sans-serif;
-              " onmouseover="this.style.background='#dc2626';"
-                onmouseout="this.style.background='#ef4444';">
-                📥 تحميل الوصل PDF
-              </a>
-            </div>
-          </div>
-        `,
-        showConfirmButton: false,
-        width: 520
-      });
+     Swal.fire({
+  title: "✅ التسجيل موجود",
+  html: `
+    <div style="text-align:right;font-family:'Cairo',sans-serif;direction:rtl;">
+      <p><b>اللقب والإسم:</b> ${d.name}</p>
+      <p><b>تاريخ الميلاد:</b> ${d.birth}</p>
+      <p><b>الصفة:</b> ${d.status}</p>
+      <p><b>الدائرة:</b> ${d.daira}</p>
+      <p><b>البلدية:</b> ${d.commune}</p>
+      <p><b>الرحلة:</b> ${d.trip}</p>
+      <p><b>رقم الهاتف:</b> ${d.phone}</p>
+      <p><b>تاريخ التسجيل:</b> ${d.date}</p>
+      <br>
+      <div style="text-align:center;">
+        <a href="${data.fileUrl}" target="_blank" style="
+          display:inline-block;
+          background:#ef4444;
+          color:white;
+          text-decoration:none;
+          padding:12px 26px;
+          border-radius:10px;
+          font-weight:700;
+          font-size:17px;
+          transition:0.3s;
+          font-family:'Cairo',sans-serif;
+        " onmouseover="this.style.background='#dc2626';"
+          onmouseout="this.style.background='#ef4444';">
+          📥 تحميل الوصل PDF
+        </a>
+      </div>
+    </div>
+  `,
+  showConfirmButton: false,
+  width: 520
+});
 
     } catch (err) {
       loader.style.display = "none";
@@ -242,6 +243,7 @@
   </script>
 </body>
 </html>
+
 
 
 
