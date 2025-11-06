@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>التحقق من تسجيل الرحلات 2025 - الخدمات الاجتماعية</title>
+  <title>تحميل وصل تسجيل الرحلات 2025 - الخدمات الاجتماعية</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -40,12 +40,6 @@
 
     .container:hover {
       transform: translateY(-5px);
-    }
-
-    .logo {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 5px;
     }
 
     .logo img {
@@ -148,9 +142,10 @@
       اللجنة الولائية للخدمات الاجتماعية لعمال التربية لولاية توقرت
     </div>
 
-    <h1>تحميل وصل تسجيل المتقاعدين في الرحلات</h1>
+    <h1>تحميل وصل تسجيل الرحلات</h1>
 
-    <input type="text" id="empId" placeholder="أدخل رقم التعريف الوظيفي">
+    <!-- ✅ تم تعديل الاسم فقط من empId إلى phone -->
+    <input type="text" id="phone" placeholder="أدخل رقم الهاتف">
     <div class="loader" id="loader"></div>
     <button onclick="checkRegistration()">تحميل وصل التسجيل</button>
   </div>
@@ -159,13 +154,13 @@
   const scriptURL = "https://script.google.com/macros/s/AKfycbwhPWD_i8QIIZeT2RGv642Htbx7HLi36-CjQX7uyfcr6AP68Y1fNbdiidww1nbZktC8jA/exec";
 
   async function checkRegistration() {
-    const empId = document.getElementById("empId").value.trim();
+    const phone = document.getElementById("phone").value.trim();
     const loader = document.getElementById("loader");
 
-    if (!empId) {
+    if (!phone) {
       Swal.fire({
         icon: "warning",
-        title: "يرجى إدخال رقم التعريف الوظيفي",
+        title: "يرجى إدخال رقم الهاتف",
         confirmButtonText: "حسنًا"
       });
       return;
@@ -174,7 +169,7 @@
     loader.style.display = "block";
 
     try {
-      const response = await fetch(`${scriptURL}?id=${empId}`);
+      const response = await fetch(`${scriptURL}?phone=${phone}`);
       const data = await response.json();
       loader.style.display = "none";
 
@@ -182,7 +177,7 @@
         Swal.fire({
           icon: "error",
           title: "لم يتم العثور على تسجيل",
-          text: "الرقم الذي أدخلته غير موجود في تسجيلات الرحلات لسنة 2025."
+          text: "رقم الهاتف الذي أدخلته غير موجود في تسجيلات الرحلات لسنة 2025."
         });
         return;
       }
@@ -193,7 +188,6 @@
         html: `
           <div style="text-align:right;font-family:'Cairo',sans-serif;direction:rtl;">
             <p><b>اللقب والإسم:</b> ${d.name}</p>
-            <p><b>رقم الحساب:</b> ${d.empId}</p>
             <p><b>الصفة:</b> ${d.status}</p>
             <p><b>الدائرة:</b> ${d.daira}</p>
             <p><b>البلدية:</b> ${d.commune}</p>
@@ -230,14 +224,14 @@
     }
   }
 
-  // ✅ تعبئة الحقل والضغط التلقائي بعد تحميل الصفحة
+  // ✅ تعبئة الحقل تلقائيًا من الرابط وتشغيل التحميل مباشرة
   window.onload = function () {
     const urlParams = new URLSearchParams(window.location.search);
-    const empId = urlParams.get("empId");
+    const phone = urlParams.get("phone");
 
-    if (empId) {
-      const empInput = document.getElementById("empId");
-      empInput.value = empId;
+    if (phone) {
+      const input = document.getElementById("phone");
+      input.value = phone;
 
       setTimeout(() => {
         const btn = document.querySelector("button[onclick='checkRegistration()']");
@@ -246,8 +240,5 @@
     }
   };
   </script>
-
 </body>
 </html>
-
-
